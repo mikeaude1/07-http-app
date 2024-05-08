@@ -28,6 +28,6 @@ export const localhostUserToModel = ( localhostUser )=>{
         gender,
         id,
         isActive,
-        lastNAme: last_name,
+        lastName: last_name,
 });
 }
