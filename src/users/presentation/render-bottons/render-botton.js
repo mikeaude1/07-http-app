@@ -20,16 +20,13 @@ export const  renderBottons = (element) => {
 
     nextButton.addEventListener('click', async() => {
         await usersStore.loadNextPage();
-        currentPageLabel.innerText= usersStore.getCurrentPage();
-        renderTable(element)
-        if(usersStore.getCurrentPage()===5) nextButton.setAttribute('disabled','disabled');
-        if(usersStore.getCurrentPage()===2) prevButton.removeAttribute('disabled','disabled');
+        currentPageLabel.innerText = usersStore.getCurrentPage();
+        renderTable( element );
     });
+
     prevButton.addEventListener('click', async() => {
         await usersStore.loadPreviousPage();
-        currentPageLabel.innerText= usersStore.getCurrentPage();
-        renderTable(usersStore.getUsers());
-        if(usersStore.getCurrentPage()===4) nextButton.removeAttribute('disabled','disabled');
-        if(usersStore.getCurrentPage()===1) prevButton.setAttribute('disabled','disabled');
+        currentPageLabel.innerText = usersStore.getCurrentPage();
+        renderTable( element );
     });
 }

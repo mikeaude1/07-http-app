@@ -8,22 +8,19 @@ const state ={
 }
 
 const loadNextPage = async() => {
-   const users = await loadUsersByPage(state.currentPage + 1);
-   if(users.length === 0) return;
-   state.currentPage +=1;
-   state.users= users;
-   console.log('state',state);
-   
+    const users = await loadUsersByPage( state.currentPage + 1 );
+    if ( users.length === 0 ) return;
+
+    state.currentPage += 1;
+    state.users = users;
 }
 
 const loadPreviousPage = async() => {
-    const users = await loadUsersByPage(state.currentPage - 1);
-    if(users.length === 0) return;
-    state.currentPage -=1;
-    state.users= users;
-
-    console.log('state',state.users); 
-    return state.users
+    if ( state.currentPage === 1 ) return;
+    const users = await loadUsersByPage( state.currentPage - 1 );
+    
+    state.users = users;
+    state.currentPage -= 1;
 }
 
 /**
@@ -44,7 +41,12 @@ const onUserChanged = (updatedUser	) => {
     }
 }
 const reloadPage = async() => { 
-    throw new Error ( ' No implements ');
+    const users = await loadUsersByPage(state.currentPage);
+    if(users.length === 0) {
+        await loadPreviousPage();
+        return;
+    };
+    state.users= users;
 }
 
 
